@@ -1,39 +1,40 @@
 "use client";
 
-import { APIProvider, AdvancedMarker, Map } from "@vis.gl/react-google-maps";
-import { useEffect, useMemo, useState } from "react";
+import { APIProvider, AdvancedMarker, Map, Pin } from "@vis.gl/react-google-maps";
+import { useMemo } from "react";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
 export default function MapComponent() {
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
   const googleMapId = process.env.GOOGLE_MAPS_ID;
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
-  const mapCenter = useMemo<LatLngLiteral>(
-    () => ({ lat: 7.9840886, lng: 80.7029496 }),
-    []
-  );
+  const mapCenter = useMemo<LatLngLiteral>(() => ({ lat: 7.9558296, lng: 80.7572161 }), []);
 
-  if (googleMapsApiKey == undefined && isClient) {
+  if (googleMapsApiKey == undefined) {
     return <div>Map loading.</div>;
   }
-
   return (
-    isClient &&
     googleMapsApiKey &&
     googleMapId && (
-      <div style={{ height: "100vh", width: "100%" }}>
-        <APIProvider apiKey={googleMapsApiKey}>
-          <Map center={mapCenter} zoom={9} mapId={googleMapId}>
-            <AdvancedMarker
-              position={{ lat: 7.9840886, lng: 80.7029496 }}
-            ></AdvancedMarker>
-          </Map>
-        </APIProvider>
+      <div className="row">
+        <div className="col-md-12">
+          <div style={{ height: "800px" }}>
+            <APIProvider apiKey={googleMapsApiKey}>
+              <Map
+                defaultCenter={mapCenter}
+                defaultZoom={5}
+                mapId={googleMapId}
+              >
+                <AdvancedMarker
+                  position={{ lat: 7.9558296, lng: 80.7572161 }}
+                >
+                  <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}></Pin>
+                </AdvancedMarker>
+              </Map>
+            </APIProvider>
+          </div>
+        </div>
       </div>
     )
   );
