@@ -1,8 +1,8 @@
 "use client";
 
-import { APIProvider, AdvancedMarker, Map, Pin } from "@vis.gl/react-google-maps";
+import { APIProvider, AdvancedMarker, InfoWindow, Map, Pin } from "@vis.gl/react-google-maps";
 import { useMemo } from "react";
-import {Place, places} from "../data/places"
+import { Place, places } from "../data/places"
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 
@@ -24,19 +24,33 @@ export default function MapComponent() {
             <APIProvider apiKey={googleMapsApiKey}>
               <Map
                 defaultCenter={mapCenter}
-                defaultZoom={7}
+                defaultZoom={9}
                 mapId={googleMapId}
               >
                 {
                   places.map((place: Place, key: number) => (
-                    <AdvancedMarker
-                      position={{ lat: place.geoPoint.latitude, lng: place.geoPoint.longitude }}
-                      key={key}
-                    >
-                      <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}></Pin>
-                    </AdvancedMarker>
+                    <div>
+                      <AdvancedMarker
+                        position={{ lat: place.geoPoint.latitude, lng: place.geoPoint.longitude }}
+                        key={key}
+                      >
+                        <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}></Pin>
+                      </AdvancedMarker>
+                      <InfoWindow
+                        position={{ lat: place.geoPoint.latitude, lng: place.geoPoint.longitude }}
+                        key={key}
+                      >
+                        <div>
+                            <h4>{place.name}</h4>
+                            <p>{place.intro}</p>
+                        </div>
+                      </InfoWindow>
+                    </div>
+
+
                   ))
                 }
+
               </Map>
             </APIProvider>
           </div>
