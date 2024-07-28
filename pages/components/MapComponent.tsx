@@ -24,7 +24,7 @@ export default function MapComponent() {
             <APIProvider apiKey={googleMapsApiKey}>
               <Map
                 defaultCenter={mapCenter}
-                defaultZoom={8}
+                defaultZoom={5}
                 mapId={googleMapId}
               >
                 <MarkerComponent></MarkerComponent>
