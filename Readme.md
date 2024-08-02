@@ -9,3 +9,6 @@ environment varialbles
   Use to hold google map api key.
 
 
+Use Lint to maintain better coding standard
+`npm run lint -- --fix`
+Use command to check lint issues and possible auto fixes.

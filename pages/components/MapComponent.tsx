@@ -1,29 +1,16 @@
 "use client";
 
-import { APIProvider, AdvancedMarker, Map, Pin } from "@vis.gl/react-google-maps";
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import { useMemo } from "react";
+import { MarkerComponent } from "./MapMarkerComponent";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
-type Place = {
-  name: string;
-  geoPoint: {
-    latitude: number;
-    longitude: number;
-  };
-}
 
 export default function MapComponent() {
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
   const googleMapId = process.env.GOOGLE_MAPS_ID;
 
   const mapCenter = useMemo<LatLngLiteral>(() => ({ lat: 7.9558296, lng: 80.7572161 }), []);
-  
-  const places = [{
-    name: "Sigiriya", geoPoint: {
-      latitude: 7.9558296,
-      longitude: 80.7572161
-    }
-  }]
 
   if (googleMapsApiKey == undefined) {
     return <div>Map loading.</div>;
@@ -40,16 +27,7 @@ export default function MapComponent() {
                 defaultZoom={5}
                 mapId={googleMapId}
               >
-                {
-                  places.map((place: Place, key: number) => (
-                    <AdvancedMarker
-                      position={{ lat: place.geoPoint.latitude, lng: place.geoPoint.longitude }}
-                      key={key}
-                    >
-                      <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}></Pin>
-                    </AdvancedMarker>
-                  ))
-                }
+                <MarkerComponent></MarkerComponent>
               </Map>
             </APIProvider>
           </div>
