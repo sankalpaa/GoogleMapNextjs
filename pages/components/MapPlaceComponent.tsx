@@ -17,11 +17,20 @@ export function MapPlaceComponent() {
 
     const zoomToLocation = (location: LatLngLiteral) => {
         if (map) {
-            map.setCenter({
+            const latlng = {
                 lat: location.lat,
                 lng: location.lng,
+            };
+            map.setCenter(latlng)
+            map.setZoom(10);                        
+            new google.maps.Circle({
+                strokeColor: "#FF0000",
+                strokeWeight: 2,
+                fillColor: "#FF0000",
+                map,
+                center: latlng,
+                radius: 3000,
             })
-            map.setZoom(10);
         }
     }
 
