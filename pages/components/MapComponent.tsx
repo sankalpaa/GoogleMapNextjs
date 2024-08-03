@@ -7,7 +7,7 @@ import { Libraries, useLoadScript } from "@react-google-maps/api";
 import "../../assets/css/map.css"
 import { MapPlaceComponent } from "./MapPlaceComponent";
 
-type LatLngLiteral = google.maps.LatLngLiteral;
+export type LatLngLiteral = google.maps.LatLngLiteral;
 
 export default function MapComponent() {
   const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
@@ -36,7 +36,7 @@ export default function MapComponent() {
               </div>
             </div>
             <div className="row address">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <MapPlaceComponent></MapPlaceComponent>
               </div>
             </div>
