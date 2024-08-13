@@ -45,7 +45,11 @@ export function MarkerComponent() {
                     onClick={() => setSelectedPlaceId(place.id)}
                     ref={(marker) => setMarkerRef(marker, key)}
                 >
-                    <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}></Pin>
+                    <Pin background={'#FF00FF'} borderColor={'#FF00FF'} glyphColor={'#FFFFFF'}>
+                        <span style={{ color: "red" }}>
+                            <h6>{place.name}</h6>
+                        </span>
+                    </Pin>
                 </AdvancedMarker>
                 {
                     selectedPlaceId && selectedPlaceId == place.id && (
